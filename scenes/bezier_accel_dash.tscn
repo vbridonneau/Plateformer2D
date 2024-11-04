@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvkg7mht4cp8y"]
+
+[ext_resource type="Script" path="res://scripts/bezier_accel_dash.gd" id="1_xpyho"]
+
+[node name="BezierAccelDash" type="Node2D"]
+script = ExtResource("1_xpyho")
+
+[node name="p_0" type="Node2D" parent="."]
+position = Vector2(0, -64)
+
+[node name="p_1" type="Node2D" parent="."]
+position = Vector2(104, -64)
+
+[node name="p_2" type="Node2D" parent="."]
+position = Vector2(64, -72)
+
+[node name="p_3" type="Node2D" parent="."]
+position = Vector2(64, 0)

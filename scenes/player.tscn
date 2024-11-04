@@ -1,0 +1,137 @@
+[gd_scene load_steps=18 format=3 uid="uid://crffrtf882qgp"]
+
+[ext_resource type="Texture2D" uid="uid://cimei2e0vjdbh" path="res://assets/sprites/knight.png" id="1_0ie77"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_gait0"]
+[ext_resource type="PackedScene" uid="uid://cvkg7mht4cp8y" path="res://scenes/bezier_accel_dash.tscn" id="2_8b0pg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kmut0"]
+atlas = ExtResource("1_0ie77")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vj3qc"]
+atlas = ExtResource("1_0ie77")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_186o6"]
+atlas = ExtResource("1_0ie77")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abcfu"]
+atlas = ExtResource("1_0ie77")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5dbw4"]
+atlas = ExtResource("1_0ie77")
+region = Rect2(0, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_777d3"]
+atlas = ExtResource("1_0ie77")
+region = Rect2(32, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5av5x"]
+atlas = ExtResource("1_0ie77")
+region = Rect2(64, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lq31e"]
+atlas = ExtResource("1_0ie77")
+region = Rect2(96, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nuv2h"]
+atlas = ExtResource("1_0ie77")
+region = Rect2(128, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6gsq3"]
+atlas = ExtResource("1_0ie77")
+region = Rect2(160, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c51ax"]
+atlas = ExtResource("1_0ie77")
+region = Rect2(192, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4f0y3"]
+atlas = ExtResource("1_0ie77")
+region = Rect2(224, 160, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wn5vo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kmut0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vj3qc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_186o6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_abcfu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5dbw4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_777d3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5av5x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lq31e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nuv2h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6gsq3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c51ax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4f0y3")
+}],
+"loop": false,
+"name": &"saut",
+"speed": 15.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_samsq"]
+radius = 5.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_gait0")
+
+[node name="BezierAccelDash" parent="." instance=ExtResource("2_8b0pg")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_wn5vo")
+animation = &"saut"
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_samsq")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="CoyoteTimer" type="Timer" parent="Timers"]
+wait_time = 0.15
+one_shot = true
+
+[node name="DashTimer" type="Timer" parent="Timers"]
+wait_time = 0.2
+one_shot = true
+
+[node name="JumpTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[connection signal="timeout" from="Timers/CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="Timers/DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="Timers/JumpTimer" to="." method="_on_jump_timer_timeout"]
