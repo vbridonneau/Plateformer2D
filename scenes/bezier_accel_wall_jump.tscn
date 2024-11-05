@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7s0si3ii8sxf"]
+
+[ext_resource type="Script" path="res://scripts/bezier_accel_wall_jump.gd" id="1_4dgao"]
+
+[node name="BezierAccel" type="Node2D"]
+script = ExtResource("1_4dgao")
+
+[node name="p_0" type="Node2D" parent="."]
+position = Vector2(1, 0)
+
+[node name="p_1" type="Node2D" parent="."]
+position = Vector2(0, -45)
+
+[node name="p_2" type="Node2D" parent="."]
+position = Vector2(0, -64)
+
+[node name="p_3" type="Node2D" parent="."]
+position = Vector2(63, -64)
