@@ -137,11 +137,15 @@ one_shot = true
 one_shot = true
 
 [node name="WallJumpTimer" type="Timer" parent="Timers"]
-wait_time = 0.2
+wait_time = 0.1
 one_shot = true
 
 [node name="BufferTimer" type="Timer" parent="Timers"]
-wait_time = 0.1
+wait_time = 0.3
+one_shot = true
+
+[node name="CoyoteWallTimer" type="Timer" parent="Timers"]
+wait_time = 0.001
 one_shot = true
 
 [connection signal="timeout" from="Timers/CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
@@ -149,3 +153,4 @@ one_shot = true
 [connection signal="timeout" from="Timers/JumpTimer" to="." method="_on_jump_timer_timeout"]
 [connection signal="timeout" from="Timers/WallJumpTimer" to="." method="_on_wall_jump_timer_timeout"]
 [connection signal="timeout" from="Timers/BufferTimer" to="." method="_on_buffer_timer_timeout"]
+[connection signal="timeout" from="Timers/CoyoteWallTimer" to="." method="_on_coyote_wall_timer_timeout"]

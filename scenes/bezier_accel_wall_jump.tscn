@@ -9,7 +9,7 @@ script = ExtResource("1_4dgao")
 position = Vector2(1, 0)
 
 [node name="p_1" type="Node2D" parent="."]
-position = Vector2(0, -45)
+position = Vector2(0, -128)
 
 [node name="p_2" type="Node2D" parent="."]
 position = Vector2(0, -64)
