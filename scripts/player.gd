@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var coyote_timer: Timer = $Timers/CoyoteTimer
 @onready var jump_timer:   Timer = $Timers/JumpTimer
 @onready var buffer_timer: Timer = $Timers/BufferTimer
-const JUMP_VELOCITY:       float = -300.0
+const JUMP_VELOCITY:       float = -400.0
 const MAX_SPEED_Y:         float = -1.5 * JUMP_VELOCITY
 const FRICTION:            float = 0.025 # Friction in the air 
 var jump_buffer:           bool  = false
@@ -25,8 +25,8 @@ const SPEED:        float = 130.0
 const WALLJUMP_DECELERACTION:        float  = 30
 const PROPULSION_SPEED_X:            float  = 450
 const PROPULSION_SPEED_Y:            float  = -450
-const NEUTRAL_SPEED_X:               float  = 300
-const NEUTRAL_SPEED_Y:               float  = -500
+const NEUTRAL_SPEED_X:               float  = 250
+const NEUTRAL_SPEED_Y:               float  = -400
 const FRICTION_SLIDING:              float  = 0.2 # Friction on a sliding wall
 var wall_jump_direction:             float  = 0
 var wall_jumping:                    bool   = false # Is the player wall jumping
@@ -208,7 +208,10 @@ func _physics_process(delta: float) -> void:
 	handle_gravity(delta)
 	handle_jump()
 
-	handle_movement(delta)	
+	handle_movement(delta)
+	
+	if is_on_floor() and is_on_wall():
+		print("Sol et air !")
 
 	lastState   = is_on_floor()
 	was_on_wall = is_on_wall_only()
